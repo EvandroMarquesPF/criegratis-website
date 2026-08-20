@@ -26,12 +26,6 @@ export default function CharacterCounterTool() {
   const remaining = currentLimit > 0 ? currentLimit - charCount : null;
   const percentage = currentLimit > 0 ? Math.min(100, Math.round((charCount / currentLimit) * 100)) : 0;
 
-  const getProgressColor = () => {
-    if (percentage > 100) return "bg-rose-500 text-rose-600";
-    if (percentage > 85) return "bg-amber-500 text-amber-600";
-    return "bg-emerald-500 text-emerald-600";
-  };
-
   return (
     <div className="space-y-6">
       {/* Seletor de Presets */}

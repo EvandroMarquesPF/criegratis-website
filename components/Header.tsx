@@ -52,7 +52,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-[#E2E8F0] dark:border-[#1E293B] bg-white/95 dark:bg-[#0F172A]/95 backdrop-blur-md transition-colors duration-200">
+    <header className="sticky top-0 z-50 relative w-full border-b border-[#E2E8F0] dark:border-[#1E293B] bg-white/95 dark:bg-[#0F172A]/95 backdrop-blur-md transition-colors duration-200">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center group shrink-0">
@@ -121,11 +121,11 @@ export default function Header() {
       </div>
 
       {/* Linha fina interativa com Início e Tempo de Animação Responsivos */}
-      <div className="border-t border-[#E2E8F0]/80 dark:border-[#1E293B]/80 bg-[#F8FAFC]/90 dark:bg-[#0B0F19]/90 py-1 px-3 sm:px-4 overflow-hidden">
+      <div className="border-t border-[#E2E8F0]/80 dark:border-[#1E293B]/80 bg-[#F8FAFC]/90 dark:bg-[#0B0F19]/90 py-1.5 px-3 sm:px-4 overflow-hidden">
         <div className="mx-auto max-w-7xl flex items-center justify-center gap-2 sm:gap-3">
           {/* Botão Play/Pause com Texto Efésios 2:8 */}
           <button
-            onClick={() => setIsPlayingVerse(!isPlayingVerse)}
+            onClick={() => setIsPlayingVerse((prev) => !prev)}
             type="button"
             className="inline-flex items-center gap-1.5 rounded-full bg-blue-50/90 dark:bg-blue-950/70 border border-blue-100 dark:border-blue-900/50 px-2.5 py-0.5 text-[10px] sm:text-[11px] font-bold text-[#2563EB] dark:text-[#38BDF8] hover:bg-[#2563EB] hover:text-white dark:hover:bg-[#38BDF8] dark:hover:text-[#0F172A] transition-all duration-150 cursor-pointer shrink-0 shadow-2xs"
             aria-label={isPlayingVerse ? "Pausar versículo" : "Tocar animação do versículo Efésios 2:8"}
@@ -142,16 +142,12 @@ export default function Header() {
           <div
             className={`overflow-hidden transition-all duration-300 ease-out flex items-center ${
               isPlayingVerse
-                ? "flex-1 max-w-[200px] xs:max-w-[260px] sm:max-w-lg md:max-w-2xl lg:max-w-3xl opacity-100"
-                : "max-w-0 opacity-0"
+                ? "flex-1 max-w-[220px] xs:max-w-[280px] sm:max-w-xl md:max-w-2xl lg:max-w-4xl opacity-100"
+                : "max-w-0 opacity-0 pointer-events-none"
             }`}
           >
             {isPlayingVerse && (
-              <div
-                key={isPlayingVerse ? "playing" : "idle"}
-                onAnimationEnd={() => setIsPlayingVerse(false)}
-                className="animate-verse-once whitespace-nowrap text-[10.5px] sm:text-xs text-[#475569] dark:text-[#CBD5E1] font-medium tracking-wide"
-              >
+              <div className="animate-verse-marquee whitespace-nowrap text-[10.5px] sm:text-xs text-[#475569] dark:text-[#CBD5E1] font-medium tracking-wide">
                 &ldquo;Porque pela graça sois salvos, por meio da fé; e isto não vem de vós, é dom de Deus.&rdquo;
               </div>
             )}

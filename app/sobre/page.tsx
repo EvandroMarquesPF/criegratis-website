@@ -64,7 +64,7 @@ export default function AboutPage() {
               </div>
               <h3 className="font-bold text-[#0F172A] text-sm">Sem Pegadinhas (100% Grátis)</h3>
               <p className="text-xs text-[#64748B]">
-                Sem cadastros, sem limite de uso diário e sem marcas d'água nas suas imagens ou QR Codes.
+                Sem cadastros, sem limite de uso diário e sem marcas d&apos;água nas suas imagens ou QR Codes.
               </p>
             </div>
           </div>

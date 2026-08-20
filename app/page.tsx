@@ -4,7 +4,6 @@ import {
   ShieldCheck,
   Zap,
   ArrowRight,
-  LayoutGrid,
   Image as ImageIcon,
   Type,
   Calculator,
@@ -330,7 +329,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-sm sm:text-base font-bold text-[#0F172A] dark:text-white">Totalmente Grátis</h3>
               <p className="text-xs sm:text-sm text-[#475569] dark:text-[#94A3B8] leading-relaxed">
-                Sem assinaturas, sem marcas d'água e sem anúncios invasivos.
+                Sem assinaturas, sem marcas d&apos;água e sem anúncios invasivos.
               </p>
             </div>
           </div>

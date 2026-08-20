@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import FileDropzone from "@/components/FileDropzone";
 import DownloadButton from "@/components/DownloadButton";
 import { convertPngToJpg, loadImageFromFile } from "@/lib/image-utils";

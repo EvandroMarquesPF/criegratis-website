@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import FileDropzone from "@/components/FileDropzone";
 import DownloadButton from "@/components/DownloadButton";
 import { compressImage, formatFileSize, loadImageFromFile } from "@/lib/image-utils";
-import { TrendingDown, ArrowDown } from "lucide-react";
+import { TrendingDown } from "lucide-react";
 
 export default function ImageCompressTool() {
   const [file, setFile] = useState<File | null>(null);

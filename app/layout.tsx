@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PwaInstallBanner from "@/components/PwaInstallBanner";
 import { SITE_NAME, SITE_URL, DEFAULT_DESCRIPTION, generateWebsiteSchema } from "@/lib/seo";
 
 const inter = Inter({
@@ -110,6 +111,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1 w-full max-w-full overflow-x-clip">{children}</main>
         <Footer />
+        <PwaInstallBanner />
         <Analytics />
       </body>
     </html>

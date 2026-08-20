@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import FileDropzone from "@/components/FileDropzone";
 import DownloadButton from "@/components/DownloadButton";
 import { loadImageFromFile, resizeImage, formatFileSize } from "@/lib/image-utils";
-import { Lock, Unlock, RefreshCw } from "lucide-react";
+import { Lock, Unlock } from "lucide-react";
 
 export default function ImageResizeTool() {
   const [file, setFile] = useState<File | null>(null);

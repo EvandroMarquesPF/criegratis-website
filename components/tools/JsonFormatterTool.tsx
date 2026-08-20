@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { formatJson, minifyJson, JsonValidationResult } from "@/lib/json-utils";
 import CopyButton from "@/components/CopyButton";
-import { AlertTriangle, CheckCircle2, Code2, Trash2, FileCode } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Trash2, FileCode } from "lucide-react";
 
 const SAMPLE_JSON = `{
   "plataforma": "Crie Grátis",

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import FileDropzone from "@/components/FileDropzone";
 import DownloadButton from "@/components/DownloadButton";
 import { convertJpgToPng, loadImageFromFile } from "@/lib/image-utils";
-import { Image as ImageIcon, ArrowRight } from "lucide-react";
+import { Image as ImageIcon } from "lucide-react";
 
 export default function JpgToPngTool() {
   const [file, setFile] = useState<File | null>(null);
@@ -35,6 +35,7 @@ export default function JpgToPngTool() {
     setFile(null);
     setPreviewUrl(null);
     setPngUrl(null);
+    setError(null);
   };
 
   return (
@@ -70,6 +71,8 @@ export default function JpgToPngTool() {
                   <p className="text-xs text-slate-500">Conversão realizada com 100% de preservação</p>
                 </div>
               </div>
+
+              {error && <p className="text-xs font-semibold text-rose-600">{error}</p>}
 
               {pngUrl && (
                 <DownloadButton

@@ -12,14 +12,23 @@ export default function QrCodeTool() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!text.trim()) {
-      setDataUrl("");
-      setError("Por favor, digite um texto ou URL para gerar o QR Code.");
-      return;
+    let isMounted = true;
+    const trimmed = text.trim();
+
+    if (!trimmed) {
+      const timer = setTimeout(() => {
+        if (isMounted) {
+          setDataUrl("");
+          setError("Por favor, digite um texto ou URL para gerar o QR Code.");
+        }
+      }, 0);
+      return () => {
+        isMounted = false;
+        clearTimeout(timer);
+      };
     }
 
-    setError(null);
-    QRCode.toDataURL(text.trim(), {
+    QRCode.toDataURL(trimmed, {
       width: 400,
       margin: 2,
       color: {
@@ -28,12 +37,21 @@ export default function QrCodeTool() {
       },
     })
       .then((url) => {
-        setDataUrl(url);
+        if (isMounted) {
+          setDataUrl(url);
+          setError(null);
+        }
       })
       .catch((err) => {
         console.error("Erro ao gerar QR Code:", err);
-        setError("Erro ao gerar o QR Code. O texto pode ser longo demais.");
+        if (isMounted) {
+          setError("Erro ao gerar o QR Code. O texto pode ser longo demais.");
+        }
       });
+
+    return () => {
+      isMounted = false;
+    };
   }, [text]);
 
   return (

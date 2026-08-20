@@ -93,6 +93,9 @@ A arquitetura do CrieGrátis foi projetada para expansão contínua sem duplica�
 
 ---
 
-## 🔒 Princípio de Privacidade
+## 🔒 Princípio de Privacidade & Sustentabilidade
 
-Todas as ferramentas de processamento de imagem, QR Code, texto e JSON operam **100% no navegador do usuário (client-side)**. Nenhum arquivo ou informação sensível é enviado para servidores externos.
+- **100% Client-Side**: Todas as ferramentas de processamento de imagem, QR Code, texto e JSON operam diretamente no navegador do usuário. Nenhum arquivo ou dado é enviado para servidores externos.
+- **Zero Anúncios**: A plataforma é 100% livre de publicidade invasiva ou rastreadores, sendo mantida exclusivamente com recursos próprios e apoio voluntário da comunidade via Pix (`pix@criegratis.com.br`).
+- **Contato Oficial**: Dúvidas, sugestões e suporte em `contato@criegratis.com.br`.
+

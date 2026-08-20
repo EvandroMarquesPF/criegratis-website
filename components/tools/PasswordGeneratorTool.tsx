@@ -1,42 +1,54 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { RefreshCw, Check } from "lucide-react";
+import { RefreshCw } from "lucide-react";
 import CopyButton from "@/components/CopyButton";
 
+function createRandomPassword(
+  len: number,
+  includeUpper: boolean,
+  includeLower: boolean,
+  includeNumbers: boolean,
+  includeSymbols: boolean
+): string {
+  let chars = "";
+  if (includeUpper) chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  if (includeLower) chars += "abcdefghijklmnopqrstuvwxyz";
+  if (includeNumbers) chars += "0123456789";
+  if (includeSymbols) chars += "!@#$%^&*()_+-=[]{}|;:,.<>?";
+
+  if (!chars || typeof window === "undefined" || !window.crypto) {
+    return "";
+  }
+
+  const array = new Uint32Array(len);
+  window.crypto.getRandomValues(array);
+
+  let res = "";
+  for (let i = 0; i < len; i++) {
+    res += chars[array[i] % chars.length];
+  }
+  return res;
+}
+
 export default function PasswordGeneratorTool() {
-  const [password, setPassword] = useState("");
   const [length, setLength] = useState(16);
   const [includeUpper, setIncludeUpper] = useState(true);
   const [includeLower, setIncludeLower] = useState(true);
   const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeSymbols, setIncludeSymbols] = useState(true);
+  const [password, setPassword] = useState("");
 
   const generatePassword = useCallback(() => {
-    let chars = "";
-    if (includeUpper) chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    if (includeLower) chars += "abcdefghijklmnopqrstuvwxyz";
-    if (includeNumbers) chars += "0123456789";
-    if (includeSymbols) chars += "!@#$%^&*()_+-=[]{}|;:,.<>?";
-
-    if (!chars) {
-      setPassword("");
-      return;
-    }
-
-    // Criptograficamente seguro usando API nativa
-    const array = new Uint32Array(length);
-    crypto.getRandomValues(array);
-
-    let res = "";
-    for (let i = 0; i < length; i++) {
-      res += chars[array[i] % chars.length];
-    }
-    setPassword(res);
+    const nextPassword = createRandomPassword(length, includeUpper, includeLower, includeNumbers, includeSymbols);
+    setPassword(nextPassword);
   }, [length, includeUpper, includeLower, includeNumbers, includeSymbols]);
 
   useEffect(() => {
-    generatePassword();
+    const timer = setTimeout(() => {
+      generatePassword();
+    }, 0);
+    return () => clearTimeout(timer);
   }, [generatePassword]);
 
   // Cálculo de Força da Senha

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Heart, Copy, Check, X, QrCode } from "lucide-react";
+import { Heart, Copy, Check, X } from "lucide-react";
 
 export default function SupportCard() {
   const [modalOpen, setModalOpen] = useState(false);

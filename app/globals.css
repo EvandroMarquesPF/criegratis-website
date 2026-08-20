@@ -42,7 +42,7 @@
   }
 }
 
-@keyframes verseSlideOnce {
+@keyframes verseMarquee {
   0% {
     transform: translateX(100%);
   }
@@ -51,28 +51,54 @@
   }
 }
 
-/* Animação Responsiva Dinâmica: tempo calibrado por tamanho de tela */
-.animate-verse-once {
+/* Animação Contínua e Suave do Versículo com pausa ao passar o mouse */
+.animate-verse-marquee {
   display: inline-block;
   white-space: nowrap;
   will-change: transform;
-  animation: verseSlideOnce 8.5s linear 1;
+  animation: verseMarquee 15s linear infinite;
 }
 
-@media (min-width: 480px) {
-  .animate-verse-once {
-    animation-duration: 10s;
-  }
+.animate-verse-marquee:hover {
+  animation-play-state: paused;
 }
 
 @media (min-width: 640px) {
-  .animate-verse-once {
-    animation-duration: 12s;
+  .animate-verse-marquee {
+    animation-duration: 18s;
   }
 }
 
 @media (min-width: 1024px) {
-  .animate-verse-once {
-    animation-duration: 14s;
+  .animate-verse-marquee {
+    animation-duration: 22s;
   }
+}
+
+/* Transição com Efeito Bounce de 1s para troca de páginas */
+@keyframes pageBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.96);
+  }
+  40% {
+    opacity: 0.85;
+    transform: translateY(-10px) scale(1.02);
+  }
+  70% {
+    transform: translateY(4px) scale(0.995);
+  }
+  90% {
+    transform: translateY(-2px) scale(1.005);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-page-bounce {
+  animation: pageBounce 1s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
+  will-change: transform, opacity;
+  transform-origin: top center;
 }

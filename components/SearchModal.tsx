@@ -18,11 +18,10 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         inputRef.current?.focus();
       }, 30);
-      setQuery("");
-      setResults([]);
+      return () => clearTimeout(timer);
     }
   }, [isOpen]);
 

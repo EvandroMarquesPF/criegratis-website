@@ -1,5 +1,4 @@
-import React from "react";
-import { ToolInfo, TOOLS } from "@/lib/tools";
+import { TOOLS } from "@/lib/tools";
 import ToolGrid from "./ToolGrid";
 
 interface RelatedToolsProps {

@@ -108,6 +108,11 @@ export default function Footer() {
               <li>
                 <Link href="/contato" className="hover:text-white transition-colors">Contato</Link>
               </li>
+              <li>
+                <a href="mailto:contato@criegratis.com.br" className="text-xs text-[#38BDF8] hover:underline font-mono">
+                  contato@criegratis.com.br
+                </a>
+              </li>
             </ul>
           </div>
         </div>

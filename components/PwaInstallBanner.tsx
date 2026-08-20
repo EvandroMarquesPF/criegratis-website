@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useSyncExternalStore } from "react";
-import { Smartphone, X, Share2, PlusSquare } from "lucide-react";
+import { Smartphone, Download, X, Share2, PlusSquare, Sparkles } from "lucide-react";
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -29,10 +29,11 @@ function subscribeStandalone(callback: () => void) {
   };
 }
 
-export default function PwaInstallButton() {
+export default function PwaInstallBanner() {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
-  const [manualInstalled, setManualInstalled] = useState(false);
+  const [showBanner, setShowBanner] = useState(false);
   const [showIosModal, setShowIosModal] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(false);
 
   const isStandalone = useSyncExternalStore(
     subscribeStandalone,
@@ -47,10 +48,28 @@ export default function PwaInstallButton() {
     };
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    // Exibe o banner suavemente após 2.5 segundos de navegação no primeiro acesso
+    const timer = setTimeout(() => {
+      const dismissed = typeof window !== "undefined" && localStorage.getItem("criegratis-pwa-dismissed") === "true";
+      if (!isStandalone && !dismissed) {
+        setShowBanner(true);
+      }
+    }, 2500);
+
     return () => {
       window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+      clearTimeout(timer);
     };
-  }, []);
+  }, [isStandalone]);
+
+  const handleDismiss = () => {
+    setShowBanner(false);
+    setIsDismissed(true);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("criegratis-pwa-dismissed", "true");
+    }
+  };
 
   const handleInstallClick = async () => {
     if (typeof window !== "undefined") {
@@ -66,7 +85,7 @@ export default function PwaInstallButton() {
       await deferredPrompt.prompt();
       const choice = await deferredPrompt.userChoice;
       if (choice && choice.outcome === "accepted") {
-        setManualInstalled(true);
+        handleDismiss();
       }
       setDeferredPrompt(null);
     } else {
@@ -74,20 +93,63 @@ export default function PwaInstallButton() {
     }
   };
 
-  if (isStandalone || manualInstalled) return null;
+  if (isStandalone || isDismissed || !showBanner) return null;
 
   return (
     <>
-      {/* Botão de Instalar / Atalho */}
-      <button
-        onClick={handleInstallClick}
-        type="button"
-        className="flex items-center gap-2 rounded-xl border border-[#2563EB]/30 dark:border-[#38BDF8]/30 bg-blue-50/60 dark:bg-blue-950/40 px-3 py-2 text-xs font-bold text-[#2563EB] dark:text-[#38BDF8] hover:bg-[#2563EB] hover:text-white dark:hover:bg-[#38BDF8] dark:hover:text-[#0F172A] transition-all duration-150 cursor-pointer shadow-2xs w-full sm:w-auto justify-center"
-        aria-label="Instalar App / Criar Atalho"
+      {/* Banner Flutuante no Rodapé */}
+      <aside
+        aria-label="Aviso de Instalação do Aplicativo"
+        className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 z-40 max-w-md animate-in fade-in slide-in-from-bottom-5 duration-300 transition-all"
       >
-        <Smartphone className="h-4 w-4 shrink-0" />
-        <span>Criar Atalho / App</span>
-      </button>
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-[#2563EB]/25 dark:border-[#38BDF8]/25 bg-white/95 dark:bg-[#1E293B]/95 p-4 sm:p-5 shadow-2xl backdrop-blur-md">
+          {/* Luz de destaque de fundo */}
+          <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-blue-500/10 blur-2xl pointer-events-none" />
+
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#2563EB] to-[#38BDF8] text-white shadow-md shadow-blue-500/20">
+                <Smartphone className="h-6 w-6" />
+              </div>
+              <div>
+                <div className="flex items-center gap-1.5 font-bold text-[#0F172A] dark:text-white text-sm">
+                  <span>Instalar o Crie Grátis</span>
+                  <Sparkles className="h-3.5 w-3.5 text-[#F59E0B]" />
+                </div>
+                <p className="text-xs text-[#64748B] dark:text-[#94A3B8] leading-relaxed mt-0.5">
+                  Acesse direto da tela de início, offline e 100% gratuito.
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={handleDismiss}
+              aria-label="Fechar aviso"
+              className="rounded-full p-1 text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#0F172A] hover:text-[#0F172A] dark:hover:text-white transition-colors"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+
+          <div className="mt-4 flex items-center justify-end gap-2.5">
+            <button
+              onClick={handleDismiss}
+              type="button"
+              className="rounded-xl px-3 py-2 text-xs font-semibold text-[#64748B] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#0F172A] transition-colors"
+            >
+              Agora não
+            </button>
+            <button
+              onClick={handleInstallClick}
+              type="button"
+              className="flex items-center gap-1.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] dark:bg-[#38BDF8] dark:hover:bg-[#0EA5E9] px-4 py-2 text-xs font-bold text-white dark:text-[#0F172A] shadow-md shadow-blue-500/20 hover:shadow-lg transition-all duration-150 active:scale-95"
+            >
+              <Download className="h-3.5 w-3.5" />
+              <span>Instalar Agora</span>
+            </button>
+          </div>
+        </div>
+      </aside>
 
       {/* Modal Guia para iOS / Navegadores Manuais */}
       {showIosModal && (
@@ -136,7 +198,10 @@ export default function PwaInstallButton() {
             </div>
 
             <button
-              onClick={() => setShowIosModal(false)}
+              onClick={() => {
+                setShowIosModal(false);
+                handleDismiss();
+              }}
               className="w-full rounded-xl bg-[#2563EB] py-2.5 text-xs font-bold text-white hover:bg-[#1D4ED8] transition-colors"
             >
               Entendido
@@ -147,4 +212,3 @@ export default function PwaInstallButton() {
     </>
   );
 }
-

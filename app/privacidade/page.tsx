@@ -40,16 +40,16 @@ export default function PrivacyPage() {
         </section>
 
         <section className="space-y-2 pt-4 border-t border-[#F1F5F9]">
-          <h2 className="text-lg font-bold text-[#0F172A]">3. Cookies e Publicidade</h2>
+          <h2 className="text-lg font-bold text-[#0F172A]">3. Ausência de Anúncios e Sustentabilidade</h2>
           <p className="text-[#475569]">
-            Poderemos exibir anúncios publicitários no futuro (como Google AdSense) para manter a gratuidade dos nossos serviços. Esses parceiros podem utilizar cookies não invasivos para veicular anúncios relevantes.
+            O <strong>Crie Grátis não exibe anúncios publicitários, pop-ups ou rastreadores de publicidade de terceiros</strong>. A plataforma é mantida e sustentada com recursos próprios e contribuições voluntárias da comunidade via Pix, garantindo uma navegação 100% limpa, segura e sem poluição visual.
           </p>
         </section>
 
         <section className="space-y-2 pt-4 border-t border-[#F1F5F9]">
           <h2 className="text-lg font-bold text-[#0F172A]">4. Contato sobre Privacidade</h2>
           <p className="text-[#475569]">
-            Caso você tenha dúvidas ou sugestões em relação à nossa política de privacidade, entre em contato através da nossa página de contato.
+            Caso você tenha dúvidas ou sugestões em relação à nossa política de privacidade, entre em contato através do e-mail oficial <a href="mailto:contato@criegratis.com.br" className="text-[#2563EB] font-bold hover:underline">contato@criegratis.com.br</a> ou pela nossa página de contato.
           </p>
         </section>
       </div>
