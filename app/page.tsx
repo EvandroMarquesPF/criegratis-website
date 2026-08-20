@@ -23,60 +23,15 @@ export default function HomePage() {
   return (
     <div className="space-y-12 sm:space-y-16 pb-12 sm:pb-16 w-full max-w-full overflow-x-clip">
       {/* HERO DA HOMEPAGE */}
-      <section className="relative overflow-hidden border-b border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#0F172A]/50 pt-8 pb-12 sm:pt-16 sm:pb-20">
+      <section className="relative overflow-hidden border-b border-[#E2E8F0] dark:border-[#1E293B] bg-[#F8FAFC] dark:bg-[#0F172A]/50 pt-6 pb-12 sm:pt-16 sm:pb-20">
         {/* Detalhes de Fundo Geométricos Suaves */}
         <div className="absolute top-12 right-12 h-64 w-64 rounded-full bg-blue-100/40 dark:bg-blue-600/10 blur-3xl pointer-events-none" />
         <div className="absolute bottom-8 left-12 h-64 w-64 rounded-full bg-cyan-100/40 dark:bg-cyan-600/10 blur-3xl pointer-events-none" />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
-            {/* Coluna Esquerda: Texto e Ações */}
-            <div className="lg:col-span-7 space-y-5 sm:space-y-6 text-center lg:text-left">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#0F172A] dark:text-white leading-[1.18] sm:leading-[1.15]">
-                Ferramentas gratuitas para{" "}
-                <span className="text-[#2563EB] dark:text-[#38BDF8]">criar</span>,{" "}
-                <span className="text-[#2563EB] dark:text-[#38BDF8]">converter</span> e{" "}
-                <span className="text-[#2563EB] dark:text-[#38BDF8]">resolver</span>.
-              </h1>
-
-              <p className="text-sm sm:text-lg text-[#475569] dark:text-[#94A3B8] leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Tudo o que você precisa, em um só lugar. Rápido, gratuito e 100% no navegador.
-              </p>
-
-              {/* Botões de Ação do Hero (Responsivos para Touch Mobile) */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 pt-1">
-                <Link
-                  href="/ferramentas"
-                  className="inline-flex items-center justify-center rounded-xl bg-[#2563EB] px-6 py-3.5 sm:py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#1D4ED8] active:scale-[0.98] transition-all cursor-pointer min-h-[44px]"
-                >
-                  Explorar ferramentas
-                </Link>
-                <Link
-                  href="/#populares"
-                  className="inline-flex items-center justify-center rounded-xl border border-[#E2E8F0] dark:border-[#334155] bg-white dark:bg-[#1E293B] px-6 py-3.5 sm:py-3 text-sm font-semibold text-[#0F172A] dark:text-white shadow-2xs hover:bg-[#F8FAFC] dark:hover:bg-[#0F172A] hover:border-[#CBD5E1] dark:hover:border-[#475569] active:scale-[0.98] transition-all cursor-pointer min-h-[44px]"
-                >
-                  Mais usadas
-                </Link>
-              </div>
-
-              {/* Campo de Busca */}
-              <div className="pt-3 max-w-xl mx-auto lg:mx-0">
-                <SearchBar placeholder="Buscar ferramenta..." />
-                <div className="mt-3 flex flex-wrap items-center justify-center lg:justify-start gap-1.5 sm:gap-2 text-xs text-[#64748B] dark:text-[#94A3B8]">
-                  <span className="font-medium text-[#0F172A] dark:text-white">Sugestões:</span>
-                  <Link href="/criar-qr-code" className="hover:text-[#2563EB] dark:hover:text-[#38BDF8] hover:underline">QR Code</Link>
-                  <span>•</span>
-                  <Link href="/comprimir-imagem" className="hover:text-[#2563EB] dark:hover:text-[#38BDF8] hover:underline">Comprimir Imagem</Link>
-                  <span>•</span>
-                  <Link href="/gerar-senha" className="hover:text-[#2563EB] dark:hover:text-[#38BDF8] hover:underline">Gerar Senha</Link>
-                  <span>•</span>
-                  <Link href="/calculadora-de-porcentagem" className="hover:text-[#2563EB] dark:hover:text-[#38BDF8] hover:underline">Calculadora %</Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Coluna Direita: Mockup Visual das Ferramentas */}
-            <div className="lg:col-span-5 flex justify-center w-full max-w-full">
+            {/* 1. NO MOBILE É O PRIMEIRO (order-1) / NO DESKTOP É A DIREITA (order-2 lg:col-span-5): Mockup Visual */}
+            <div className="order-1 lg:order-2 lg:col-span-5 flex justify-center w-full max-w-full">
               <div className="relative w-full max-w-sm sm:max-w-md">
                 {/* Janela / Card Flutuante */}
                 <div className="overflow-hidden rounded-3xl border border-[#E2E8F0] dark:border-[#334155] bg-white dark:bg-[#1E293B] shadow-xl shadow-slate-200/50 dark:shadow-black/40">
@@ -147,6 +102,53 @@ export default function HomePage() {
                     ⚡ Processamento direto no navegador
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* 2. NO MOBILE É O SEGUNDO (order-2) / NO DESKTOP É A ESQUERDA (order-1 lg:col-span-7): Texto e Ações */}
+            <div className="order-2 lg:order-1 lg:col-span-7 flex flex-col space-y-5 sm:space-y-6 text-center lg:text-left">
+              {/* Texto H1 */}
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#0F172A] dark:text-white leading-[1.18] sm:leading-[1.15]">
+                Ferramentas gratuitas para{" "}
+                <span className="text-[#2563EB] dark:text-[#38BDF8]">criar</span>,{" "}
+                <span className="text-[#2563EB] dark:text-[#38BDF8]">converter</span> e{" "}
+                <span className="text-[#2563EB] dark:text-[#38BDF8]">resolver</span>.
+              </h1>
+
+              {/* Texto H2 */}
+              <h2 className="text-sm sm:text-lg text-[#475569] dark:text-[#94A3B8] font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                Tudo o que você precisa, em um só lugar. Rápido, gratuito e 100% no navegador.
+              </h2>
+
+              {/* Barra de Busca (Vem antes dos botões no mobile) */}
+              <div className="pt-1 max-w-xl mx-auto lg:mx-0 w-full">
+                <SearchBar placeholder="Buscar ferramenta..." />
+                <div className="mt-3 flex flex-wrap items-center justify-center lg:justify-start gap-1.5 sm:gap-2 text-xs text-[#64748B] dark:text-[#94A3B8]">
+                  <span className="font-medium text-[#0F172A] dark:text-white">Sugestões:</span>
+                  <Link href="/criar-qr-code" className="hover:text-[#2563EB] dark:hover:text-[#38BDF8] hover:underline">QR Code</Link>
+                  <span>•</span>
+                  <Link href="/comprimir-imagem" className="hover:text-[#2563EB] dark:hover:text-[#38BDF8] hover:underline">Comprimir Imagem</Link>
+                  <span>•</span>
+                  <Link href="/gerar-senha" className="hover:text-[#2563EB] dark:hover:text-[#38BDF8] hover:underline">Gerar Senha</Link>
+                  <span>•</span>
+                  <Link href="/calculadora-de-porcentagem" className="hover:text-[#2563EB] dark:hover:text-[#38BDF8] hover:underline">Calculadora %</Link>
+                </div>
+              </div>
+
+              {/* Botões de Ação do Hero (Explorar e Mais usadas) */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 pt-2">
+                <Link
+                  href="/ferramentas"
+                  className="inline-flex items-center justify-center rounded-xl bg-[#2563EB] px-6 py-3.5 sm:py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#1D4ED8] active:scale-[0.98] transition-all cursor-pointer min-h-[44px]"
+                >
+                  Explorar ferramentas
+                </Link>
+                <Link
+                  href="/#populares"
+                  className="inline-flex items-center justify-center rounded-xl border border-[#E2E8F0] dark:border-[#334155] bg-white dark:bg-[#1E293B] px-6 py-3.5 sm:py-3 text-sm font-semibold text-[#0F172A] dark:text-white shadow-2xs hover:bg-[#F8FAFC] dark:hover:bg-[#0F172A] hover:border-[#CBD5E1] dark:hover:border-[#475569] active:scale-[0.98] transition-all cursor-pointer min-h-[44px]"
+                >
+                  Mais usadas
+                </Link>
               </div>
             </div>
           </div>
@@ -235,7 +237,7 @@ export default function HomePage() {
 
             <div className="flex flex-col items-center text-center space-y-3 p-5 sm:p-6 rounded-2xl bg-[#F8FAFC] dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[#334155]">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 dark:bg-amber-950/50 text-[#F59E0B] dark:text-[#FBBF24] border border-amber-100 dark:border-amber-900/50">
-                <DollarBlockedIcon className="h-6 w-6" />
+                <DollarBlockedIcon className="h-6 w-6 sm:h-7 sm:w-7 mb-1 text-[#2563EB] dark:text-[#38BDF8]" />
               </div>
               <h3 className="text-sm sm:text-base font-bold text-[#0F172A] dark:text-white">Totalmente Grátis</h3>
               <p className="text-xs sm:text-sm text-[#475569] dark:text-[#94A3B8] leading-relaxed">
