@@ -3,14 +3,16 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, Menu, X, Wrench, Grid2X2, Flame } from "lucide-react";
+import { Search, Menu, X, Wrench, Grid2X2, Flame, Play, Pause } from "lucide-react";
 import Logo from "./Logo";
 import SearchModal from "./SearchModal";
 import ThemeToggle from "./ThemeToggle";
+import PwaInstallButton from "./PwaInstallButton";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
+  const [isPlayingVerse, setIsPlayingVerse] = useState(false);
   const pathname = usePathname();
 
   // Atalho de Teclado Ctrl+K / Cmd+K
@@ -80,9 +82,9 @@ export default function Header() {
           })}
         </nav>
 
-        {/* Action: Search Button + Theme Toggle */}
+        {/* Action: Search Button + PWA Button + Theme Toggle */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-          {/* Botão de Busca (Mobile: somente ícone da lupa; Desktop: barra com texto e atalho) */}
+          {/* Botão de Busca */}
           <button
             onClick={() => setSearchModalOpen(true)}
             type="button"
@@ -98,6 +100,11 @@ export default function Header() {
             </kbd>
           </button>
 
+          {/* Botão PWA no Desktop */}
+          <div className="hidden lg:block">
+            <PwaInstallButton />
+          </div>
+
           {/* Dark Mode Toggle */}
           <ThemeToggle />
 
@@ -110,6 +117,45 @@ export default function Header() {
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
+        </div>
+      </div>
+
+      {/* Linha fina interativa com Início e Tempo de Animação Responsivos */}
+      <div className="border-t border-[#E2E8F0]/80 dark:border-[#1E293B]/80 bg-[#F8FAFC]/90 dark:bg-[#0B0F19]/90 py-1 px-3 sm:px-4 overflow-hidden">
+        <div className="mx-auto max-w-7xl flex items-center justify-center gap-2 sm:gap-3">
+          {/* Botão Play/Pause com Texto Efésios 2:8 */}
+          <button
+            onClick={() => setIsPlayingVerse(!isPlayingVerse)}
+            type="button"
+            className="inline-flex items-center gap-1.5 rounded-full bg-blue-50/90 dark:bg-blue-950/70 border border-blue-100 dark:border-blue-900/50 px-2.5 py-0.5 text-[10px] sm:text-[11px] font-bold text-[#2563EB] dark:text-[#38BDF8] hover:bg-[#2563EB] hover:text-white dark:hover:bg-[#38BDF8] dark:hover:text-[#0F172A] transition-all duration-150 cursor-pointer shrink-0 shadow-2xs"
+            aria-label={isPlayingVerse ? "Pausar versículo" : "Tocar animação do versículo Efésios 2:8"}
+          >
+            {isPlayingVerse ? (
+              <Pause className="h-3 w-3 fill-current" />
+            ) : (
+              <Play className="h-3 w-3 fill-current" />
+            )}
+            <span>Efésios 2:8</span>
+          </button>
+
+          {/* Container Responsivo com Início Imediato e Fade suave */}
+          <div
+            className={`overflow-hidden transition-all duration-300 ease-out flex items-center ${
+              isPlayingVerse
+                ? "flex-1 max-w-[200px] xs:max-w-[260px] sm:max-w-lg md:max-w-2xl lg:max-w-3xl opacity-100"
+                : "max-w-0 opacity-0"
+            }`}
+          >
+            {isPlayingVerse && (
+              <div
+                key={isPlayingVerse ? "playing" : "idle"}
+                onAnimationEnd={() => setIsPlayingVerse(false)}
+                className="animate-verse-once whitespace-nowrap text-[10.5px] sm:text-xs text-[#475569] dark:text-[#CBD5E1] font-medium tracking-wide"
+              >
+                &ldquo;Porque pela graça sois salvos, por meio da fé; e isto não vem de vós, é dom de Deus.&rdquo;
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -137,6 +183,12 @@ export default function Header() {
                 </Link>
               );
             })}
+            
+            {/* Botão de Atalho PWA no Menu Mobile */}
+            <div className="pt-2 pb-1">
+              <PwaInstallButton />
+            </div>
+
             <hr className="my-2 border-[#E2E8F0] dark:border-[#1E293B]" />
             <Link
               href="/sobre"

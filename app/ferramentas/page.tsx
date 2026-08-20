@@ -4,7 +4,6 @@ import Link from "next/link";
 import { TOOLS } from "@/lib/tools";
 import { CATEGORIES } from "@/lib/categories";
 import ToolGrid from "@/components/ToolGrid";
-import AdPlaceholder from "@/components/AdPlaceholder";
 
 export const metadata: Metadata = {
   title: "Todas as Ferramentas Gratuitas | Crie Grátis",
@@ -52,8 +51,6 @@ export default function AllToolsPage() {
         <section>
           <ToolGrid tools={TOOLS} />
         </section>
-
-        <AdPlaceholder slot="all-tools-bottom" format="horizontal" />
       </div>
     </div>
   );

@@ -5,7 +5,6 @@ import { CATEGORIES } from "@/lib/categories";
 import { TOOLS } from "@/lib/tools";
 import CategoryCard from "@/components/CategoryCard";
 import ToolGrid from "@/components/ToolGrid";
-import AdPlaceholder from "@/components/AdPlaceholder";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -74,8 +73,6 @@ export default function CategoriasPage() {
             );
           })}
         </div>
-
-        <AdPlaceholder slot="categories-bottom" format="horizontal" />
       </div>
     </div>
   );

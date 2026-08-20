@@ -3,7 +3,6 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { TOOLS } from "@/lib/tools";
 import ToolGrid from "@/components/ToolGrid";
-import AdPlaceholder from "@/components/AdPlaceholder";
 import { ArrowRight, Award } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -96,8 +95,6 @@ export default function MaisUsadasPage() {
 
           <ToolGrid tools={topTools} />
         </section>
-
-        <AdPlaceholder slot="mais-usadas-bottom" format="horizontal" />
       </div>
     </div>
   );

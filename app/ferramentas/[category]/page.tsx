@@ -5,7 +5,6 @@ import Link from "next/link";
 import { CATEGORIES } from "@/lib/categories";
 import { getToolsByCategory } from "@/lib/tools";
 import ToolGrid from "@/components/ToolGrid";
-import AdPlaceholder from "@/components/AdPlaceholder";
 import { Image, Type, Calculator, Code2, QrCode } from "lucide-react";
 
 interface CategoryPageProps {
@@ -91,8 +90,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <section>
           <ToolGrid tools={tools} emptyMessage={`Nenhuma ferramenta encontrada na categoria ${cat.name}.`} />
         </section>
-
-        <AdPlaceholder slot="category-bottom" format="horizontal" />
       </div>
     </div>
   );

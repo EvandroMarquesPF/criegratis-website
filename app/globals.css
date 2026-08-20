@@ -41,3 +41,38 @@
     color: #FFFFFF;
   }
 }
+
+@keyframes verseSlideOnce {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Animação Responsiva Dinâmica: tempo calibrado por tamanho de tela */
+.animate-verse-once {
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform;
+  animation: verseSlideOnce 8.5s linear 1;
+}
+
+@media (min-width: 480px) {
+  .animate-verse-once {
+    animation-duration: 10s;
+  }
+}
+
+@media (min-width: 640px) {
+  .animate-verse-once {
+    animation-duration: 12s;
+  }
+}
+
+@media (min-width: 1024px) {
+  .animate-verse-once {
+    animation-duration: 14s;
+  }
+}

@@ -2,11 +2,12 @@ import React from "react";
 import Link from "next/link";
 import { ShieldCheck, Heart } from "lucide-react";
 import Logo from "./Logo";
+import FooterPixButton from "./FooterPixButton";
 import { CATEGORIES } from "@/lib/categories";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[#E2E8F0] bg-[#0F172A] text-[#94A3B8]">
+    <footer className="border-t border-[#E2E8F0] dark:border-[#1E293B] bg-[#0F172A] text-[#94A3B8]">
       {/* Banner de Privacidade */}
       <div className="border-b border-[#1E293B] bg-[#020617]/50 py-6">
         <div className="mx-auto flex max-w-7xl flex-col sm:flex-row items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 text-center sm:text-left">
@@ -30,17 +31,28 @@ export default function Footer() {
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4 lg:grid-cols-5">
-          {/* Coluna 1: Marca */}
+          {/* Coluna 1: Marca & Apoio Pix */}
           <div className="md:col-span-2 space-y-4">
             <Link href="/" className="inline-block">
               <Logo variant="white" size="md" />
             </Link>
             <p className="text-sm leading-relaxed text-[#94A3B8] max-w-sm">
-              Ferramentas gratuitas para criar, converter e resolver tarefas do seu dia a dia com velocidade, segurança e sem cadastros.
+              Ferramentas online gratuitas para todos.
             </p>
-            <p className="text-xs text-[#64748B]">
-              criegratis.com.br
-            </p>
+
+            {/* Bloco de Apoio Voluntário Pix */}
+            <div className="pt-2 space-y-2.5 max-w-sm">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-rose-400">
+                <Heart className="h-3.5 w-3.5 fill-rose-400" />
+                <span>Apoie o projeto</span>
+              </div>
+              
+              <p className="text-xs leading-relaxed text-[#64748B]">
+                O Crie Grátis é gratuito para todos. Se alguma ferramenta te ajudou, você pode contribuir voluntariamente para ajudar a manter o projeto, servidores e novas ferramentas.
+              </p>
+
+              <FooterPixButton />
+            </div>
           </div>
 
           {/* Coluna 2: Ferramentas Populares */}

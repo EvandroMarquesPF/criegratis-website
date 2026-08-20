@@ -14,7 +14,6 @@ import {
 import SearchBar from "@/components/SearchBar";
 import ToolGrid from "@/components/ToolGrid";
 import CategoryCard from "@/components/CategoryCard";
-import AdPlaceholder from "@/components/AdPlaceholder";
 import DollarBlockedIcon from "@/components/icons/DollarBlockedIcon";
 import { TOOLS } from "@/lib/tools";
 import { CATEGORIES } from "@/lib/categories";
@@ -292,11 +291,6 @@ export default function HomePage() {
         <ToolGrid tools={TOOLS} />
       </section>
 
-      {/* Publicidade entre seções */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <AdPlaceholder slot="home-middle" format="horizontal" />
-      </div>
-
       {/* PADRÕES VISUAIS / PILARES */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="rounded-3xl border border-[#E2E8F0] dark:border-[#334155] bg-white dark:bg-[#1E293B] p-6 sm:p-12 shadow-sm">
@@ -336,7 +330,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-sm sm:text-base font-bold text-[#0F172A] dark:text-white">Totalmente Grátis</h3>
               <p className="text-xs sm:text-sm text-[#475569] dark:text-[#94A3B8] leading-relaxed">
-                Sem assinaturas, sem marcas d'água e sem necessidade de criar conta ou informar e-mail.
+                Sem assinaturas, sem marcas d'água e sem anúncios invasivos.
               </p>
             </div>
           </div>
