@@ -42,6 +42,11 @@ export default function PwaInstallBanner() {
   );
 
   useEffect(() => {
+    // Registra o Service Worker para ativar os critérios PWA do Chromium / Android
+    if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js").catch(() => {});
+    }
+
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
