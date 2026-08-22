@@ -97,6 +97,12 @@ export default function Footer() {
             <h3 className="text-xs font-bold uppercase tracking-wider text-white">Institucional</h3>
             <ul className="space-y-2 text-sm">
               <li>
+                <Link href="/roadmap" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <span>Roadmap (100 Ferramentas)</span>
+                  <span className="rounded-full bg-blue-500/20 text-[#38BDF8] text-[10px] font-bold px-1.5 py-0.2">Novo</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/sobre" className="hover:text-white transition-colors">Sobre Nós</Link>
               </li>
               <li>
